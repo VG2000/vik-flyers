@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viktorija's Coaching - Career Fulfilment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #C4A484;
+            --color-primary-dark: #8B7355;
+            --color-primary-light: #E8DCD0;
+            --color-secondary: #9CB4A3;
+            --color-secondary-light: #E8F0EB;
+            --color-off-white: #FAF8F5;
+            --color-cream: #FDF9F3;
+            --color-text: #3D3D3D;
+            --color-text-light: #6B6B6B;
+            --color-gold: #B8860B;
+            --font-heading: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Lato', sans-serif;
+            --font-accent: 'Dancing Script', cursive;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: #e8e0d8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .flyer {
+            width: 5.5in;
+            height: 8.5in;
+            background: var(--color-cream);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 60px rgba(139, 115, 85, 0.25),
+                0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .flyer::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--color-secondary-light) 0%, transparent 70%);
+            opacity: 0.6;
+        }
+
+        .flyer::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0.4in 0.5in 0.35in;
+        }
+
+        .top-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                var(--color-primary) 0%, 
+                var(--color-secondary) 50%, 
+                var(--color-primary) 100%
+            );
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 0.2in;
+        }
+
+        .brand-accent {
+            font-family: var(--font-accent);
+            font-size: 1.1rem;
+            color: var(--color-primary-dark);
+            letter-spacing: 1px;
+            margin-bottom: 0.1in;
+        }
+
+        .brand-name {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--color-text);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .brand-tagline {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: var(--color-text-light);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 0.15in;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 0.15in 0;
+        }
+
+        .divider-line {
+            height: 1px;
+            width: 60px;
+            background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+        }
+
+        .divider-icon {
+            color: var(--color-secondary);
+            font-size: 0.9rem;
+        }
+
+        .main-message {
+            text-align: center;
+            margin-bottom: 0.25in;
+        }
+
+        .headline {
+            font-family: var(--font-heading);
+            font-size: 1.65rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-text);
+            line-height: 1.3;
+            margin-bottom: 0.2in;
+        }
+
+        .subheadline {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--color-text-light);
+            line-height: 1.7;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .pain-points {
+            background: linear-gradient(135deg, var(--color-off-white) 0%, rgba(156, 180, 163, 0.1) 100%);
+            border-radius: 12px;
+            padding: 0.22in 0.25in;
+            margin-bottom: 0.2in;
+            border: 1px solid rgba(156, 180, 163, 0.25);
+        }
+
+        .pain-points-title {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.15in;
+        }
+
+        .pain-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.08in;
+        }
+
+        .pain-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.78rem;
+            color: var(--color-text);
+            line-height: 1.4;
+        }
+
+        .pain-bullet {
+            width: 6px;
+            height: 6px;
+            background: var(--color-secondary);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .outcome-section {
+            text-align: center;
+            margin-bottom: 0.18in;
+        }
+
+        .outcome-intro {
+            font-family: var(--font-accent);
+            font-size: 1.15rem;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.1in;
+        }
+
+        .outcomes {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cta-intro {
+            font-family: var(--font-accent);
+            font-size: 1.2rem;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.1in;
+        }
+
+        .cta-action {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--color-text);
+            letter-spacing: 1px;
+            margin-bottom: 0.15in;
+        }
+
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 0.12in;
+        }
+
+        .qr-frame {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 
+                0 4px 15px rgba(139, 115, 85, 0.15),
+                inset 0 0 0 1px rgba(156, 180, 163, 0.3);
+        }
+
+        #qrcode {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-label {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.1in;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 0.12in;
+            border-top: 1px solid rgba(156, 180, 163, 0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 0.3in;
+            margin-bottom: 0.08in;
+        }
+
+        .contact-item {
+            font-size: 0.68rem;
+            color: var(--color-text-light);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-icon {
+            color: var(--color-primary);
+        }
+
+        .social-hint {
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            color: var(--color-secondary);
+        }
+
+        .website {
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: var(--color-primary-dark);
+            letter-spacing: 1px;
+            margin-top: 0.06in;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .flyer {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flyer">
+        <div class="top-border"></div>
+        
+        <div class="content">
+            <header class="header">
+                <p class="brand-accent">Discover Your True Calling</p>
+                <h1 class="brand-name">Viktorija's Coaching</h1>
+                <p class="brand-tagline">Purpose & Career Clarity</p>
+            </header>
+
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">✦</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <section class="main-message">
+                <h2 class="headline">Successful on paper.<br>Empty inside.</h2>
+                <p class="subheadline">
+                    You've built a career, ticked the boxes, done what was expected. 
+                    But somewhere along the way, you stopped feeling alive at work. 
+                    There's more to life than Sunday night dread.
+                </p>
+            </section>
+
+            <section class="pain-points">
+                <h3 class="pain-points-title">Recognise Yourself?</h3>
+                <div class="pain-list">
+                    <div class="pain-item">
+                        <span class="pain-bullet"></span>
+                        <span>Dreading Monday mornings and counting down to Friday</span>
+                    </div>
+                    <div class="pain-item">
+                        <span class="pain-bullet"></span>
+                        <span>Feeling trapped by the salary, the mortgage, the expectations</span>
+                    </div>
+                    <div class="pain-item">
+                        <span class="pain-bullet"></span>
+                        <span>Knowing you're capable of more but not knowing what "more" looks like</span>
+                    </div>
+                    <div class="pain-item">
+                        <span class="pain-bullet"></span>
+                        <span>Wondering "Is this it?" but afraid to rock the boat</span>
+                    </div>
+                    <div class="pain-item">
+                        <span class="pain-bullet"></span>
+                        <span>Feeling guilty for being unhappy when you "should" be grateful</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="outcome-section">
+                <p class="outcome-intro">What if work could feel different?</p>
+                <p class="outcomes">
+                    Discover what truly matters to you. Find work that aligns with your values.<br>
+                    Wake up excited about the life you're building.
+                </p>
+            </section>
+
+            <section class="cta-section">
+                <p class="cta-intro">Your next chapter starts here</p>
+                <p class="cta-action">Book Your Free Discovery Call</p>
+                
+                <div class="qr-container">
+                    <div class="qr-frame">
+                        <div id="qrcode"></div>
+                    </div>
+                    <p class="qr-label">Scan to Schedule</p>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="contact-info">
+                    <span class="contact-item">
+                        <span class="contact-icon">✉</span>
+                        hello@viktorijascoaching.com
+                    </span>
+                </div>
+                <p class="social-hint">@viktorijascoaching</p>
+                <p class="website">www.viktorijascoaching.com</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const calendlyUrl = "https://calendly.com/viktorijascoaching/discovery-call";
+        
+        new QRCode(document.getElementById("qrcode"), {
+            text: calendlyUrl,
+            width: 90,
+            height: 90,
+            colorDark: "#3D3D3D",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+        });
+    </script>
+</body>
+</html>
